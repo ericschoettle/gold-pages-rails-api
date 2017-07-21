@@ -5,3 +5,28 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+class Seed  
+
+  def self.begin
+    seed = Seed.new
+    seed.generate_businesses
+  end
+
+  def generate_businesses
+    50.times do |i|
+      business = Business.create!(
+        name: Faker::Company.name,
+        product: Faker::Company.catch_phrase,
+        slogan: Faker::Company.bs,
+        state: Faker::Address.state,
+        city: Faker::Address.city,
+        street_address: Faker::Address.street_address,
+        zip: Faker::Address.zip,
+      )
+    end
+    puts "created businesses"
+  end
+end
+
+Seed.begin
