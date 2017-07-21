@@ -5,35 +5,27 @@ class BusinessesController < ApplicationController
   def index
     @businesses = Business.all
 
-    render json: @businesses
+    json_response(@businesses) 
   end
 
-  # GET /businesses/1
+  # GET /businesses/id
   def show
-    render json: @business
+    json_response(@business)
   end
 
   # POST /businesses
   def create
-    @business = Business.new(business_params)
-
-    if @business.save
-      render json: @business, status: :created, location: @business
-    else
-      render json: @business.errors, status: :unprocessable_entity
-    end
+    @business = Business.create!(business_params)
+    json_response(@business, :created)
   end
 
-  # PATCH/PUT /businesses/1
+  # PATCH/PUT /businesses/id
   def update
-    if @business.update(business_params)
-      render json: @business
-    else
-      render json: @business.errors, status: :unprocessable_entity
-    end
+    @business.update!(business_params)
+    json_response(@business, :ok)
   end
 
-  # DELETE /businesses/1
+  # DELETE /businesses/id
   def destroy
     @business.destroy
   end
