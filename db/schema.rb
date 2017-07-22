@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(version: 20170721212657) do
   enable_extension "plpgsql"
 
   create_table "businesses", force: :cascade do |t|
-    t.text "name"
+    t.text "company"
     t.text "slogan"
     t.text "city"
     t.text "state"

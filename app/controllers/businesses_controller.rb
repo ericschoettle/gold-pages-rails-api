@@ -4,7 +4,9 @@ class BusinessesController < ApplicationController
   # GET /businesses
   def index
     @businesses = Business.all
-
+    search_params(params).each do |key, value|
+      @businesses = @businesses.public_send(key, value) if value.present?
+    end
     json_response(@businesses) 
   end
 
@@ -32,12 +34,17 @@ class BusinessesController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
+
+    def search_params(params)
+      params.slice(:company, :product, :slogan, :city, :state, :street_address, :zip)
+    end
+
     def set_business
       @business = Business.find(params[:id])
     end
 
     # Only allow a trusted parameter "white list" through.
     def business_params
-      params.require(:business).permit(:name, :product, :slogan, :city, :state, :street_address, :zip)
+      params.require(:business).permit(:company, :product, :slogan, :city, :state, :street_address, :zip)
     end
 end

@@ -16,7 +16,7 @@ class Seed
   def generate_businesses
     50.times do |i|
       business = Business.create!(
-        name: Faker::Company.name,
+        company: Faker::Company.name,
         product: Faker::Company.catch_phrase,
         slogan: Faker::Company.bs,
         state: Faker::Address.state,
@@ -25,7 +25,7 @@ class Seed
         zip: Faker::Address.zip,
       )
     end
-    puts "created businesses"
+    puts "created so many successful businesses"
   end
 end
 

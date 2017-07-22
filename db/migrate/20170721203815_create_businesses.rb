@@ -1,7 +1,7 @@
 class CreateBusinesses < ActiveRecord::Migration[5.1]
   def change
     create_table :businesses do |t|
-      t.text :name
+      t.text :company
       t.text :slogan
       t.text :city
       t.text :state
